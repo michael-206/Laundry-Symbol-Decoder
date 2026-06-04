@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Laundry Symbol Decoder</title>
+</head>
+
+<body>
+    <div id="results">
+        <ul id="results_list"></ul>
+    </div>
+    <hr>
+    <ul id="symbols_list"></ul>
+    <button onclick="getResults()">Get Results</button>
+    <hr>
+    <button onclick="addSymbol('Wash.Commerical.95℃max.Norm')"><img
+            src="static/Wash.Commerical.95℃max.Norm.png"></img></button>
+
+
+    <script>
+        const staticUrl = "static/";
+
+        const symbols = []
+
+        const definitions = {
+            "Wash.Commerical.95℃max.Norm": "	Wash in commercial machine in water not exceeding 95° C , at normal setting.",
+            "Wash.Commerical.95℃max.PermPress": "Wash in commercial machine in water not exceeding 95° C , at permanent press setting.",
+            "Wash.Any.70℃max.Norm": "Wash in domestic or commercial machine in water not exceeding 70° C , at normal setting.",
+            "Wash.Any.60℃max.Norm": "Wash in domestic or commercial machine in water not exceeding 60° C , at normal setting.",
+            "Wash.Any.60℃max.PermPress": "Wash in domestic or commercial machine in water not exceeding 60° C , at permanent press setting."
+        }
+
+        function addSymbol(symbol) {
+            console.log("added symbol: " + symbol);
+
+            const symbols_list = document.getElementById("symbols_list");
+
+            const listItem = document.createElement("li");
+            const img = document.createElement("img");
+
+            img.src = staticUrl + symbol + ".png";
+            img.alt = symbol;
+
+            listItem.appendChild(img);
+            symbols_list.appendChild(listItem);
+
+            symbols.push(symbol)
+        }
+        function getResults() {
+            const definitions_list = document.getElementById("results_list")
+            definitions_list.innerHTML = "";
+            for (const symbol of symbols) {
+
+                const child = document.createElement("li")
+                const img = document.createElement("img")
+
+                img.src = staticUrl + symbol + ".png";
+                img.alt = symbol;
+
+                const li_text = definitions[symbol]
+
+                child.appendChild(img)
+                child.append(li_text)
+
+                definitions_list.appendChild(child)
+            }
+        }
+    </script>
+</body>
+
+</html>
